@@ -1,7 +1,7 @@
 import { Fragment } from 'react'
 import { Popover, Transition } from '@headlessui/react'
 import { Bars3Icon } from '@heroicons/react/20/solid'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { user } from '../../types'
 import { useQueryClient } from "@tanstack/react-query";
 
@@ -10,11 +10,13 @@ type Props = {
 }
 
 export default function NavMenu({data}: Props) {
+  const navigate = useNavigate();
 
   const quertyClient = useQueryClient();
   const logOut = ()=>{
-    localStorage.setItem("AuthUser","[]");
-    quertyClient.invalidateQueries({queryKey: ["user"]})
+    localStorage.removeItem("AuthUser");
+    quertyClient.removeQueries({queryKey: ["user"]})
+    navigate("/auth/login");
   }
 
   return (

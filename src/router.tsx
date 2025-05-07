@@ -12,6 +12,7 @@ import ConfirmAccountView from "./views/auth/ConfirmAccountView"
 import RequestNewCode from "./views/auth/RequestNewCode"
 import ForgotPasswordView from "./views/auth/ForgotPasswordView"
 import NewPassword from "./views/auth/NewPassword"
+import ProjectTeamView from "./views/proyects/ProjectTeamView"
 
 export default function Router() {
     return(
@@ -22,6 +23,7 @@ export default function Router() {
                     <Route path="/projects/create" element={<CreateProjectView/>}  />
                     <Route path="/projects/:projectID/" element={<ProjectView/>}  />
                     <Route path="/projects/:projectID/edit" element={<EditProjectView/>}  />
+                    <Route path="/projects/:projectID/team" element={<ProjectTeamView/>}  />
                     <Route path="/404" element={<Error404View/>}  />
                 </Route>
                 <Route element={<AuthLayout/>}>

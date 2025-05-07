@@ -72,24 +72,24 @@ export default function DashboardView() {
                         leave="transition ease-in duration-75" leaveFrom="transform opacity-100 scale-100"
                         leaveTo="transform opacity-0 scale-95">
                         <Menu.Items
-                          className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none"
+                          className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg py-2 px-1.5 ring-1 ring-gray-900/5 focus:outline-none"
                         >
                           <Menu.Item>
                             <Link to={`/projects/${project._id}`}
-                              className='block px-3 py-1 text-sm leading-6 text-gray-900'>
+                              className='block px-3 py-1 text-sm leading-6 text-gray-900 rounded-sm hover:bg-gray-50 transition-colors'>
                               Ver Proyecto
                             </Link>
                           </Menu.Item>
                           <Menu.Item>
                             <Link to={`/projects/${project._id}/edit`}
-                              className='block px-3 py-1 text-sm leading-6 text-gray-900'>
+                              className='block px-3 py-1 text-sm leading-6 text-gray-900 rounded-sm hover:bg-gray-50 transition-colors'>
                               Editar Proyecto
                             </Link>
                           </Menu.Item>
                           <Menu.Item>
                             <button
                               type='button'
-                              className='block px-3 py-1 text-sm leading-6 text-red-500 cursor-pointer'
+                              className='block px-3 py-1 text-sm leading-6 text-red-500 cursor-pointer rounded-sm hover:bg-gray-50 transition-colors w-full text-left'
                               onClick={() => { mutation.mutate(project._id)}}
                             >
                               Eliminar Proyecto

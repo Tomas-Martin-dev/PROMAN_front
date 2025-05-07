@@ -9,7 +9,8 @@ export default function AppLoyout() {
     
     
     if (isLoading) return "Cargando..."
-    if (isError) {
+    
+    if (error) {
         console.log(isError, error) 
         return <Navigate to={"/auth/login"}/>
     }
@@ -22,7 +23,7 @@ export default function AppLoyout() {
                 <Outlet />
             </section>
 
-            <footer className='p-5'>
+            <footer className='p-5 bg-gray-200'>
                 <p className='text-center flex flex-col'>
                     Todos los derechos reservados {new Date().getFullYear()}
                     <span>Tomas-dev</span>

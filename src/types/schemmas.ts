@@ -51,3 +51,5 @@ export const userSchemma = z.object({
     name: z.string(),
     _id: z.string()
 })
+
+export const usersSchemma = z.array(userSchemma);

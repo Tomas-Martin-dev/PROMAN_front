@@ -2,6 +2,7 @@ import { isAxiosError } from "axios";
 import api from "../lib/axios";
 import { ConfirmToken, ForgotPasswordForm, NewPasswordForm, RequestConfirmationCodeForm, UserLoginForm, UserRegisterForm } from "../types";
 import { userSchemma } from "../types/schemmas";
+import { data } from "react-router-dom";
 
 export async function createAccount(formData: UserRegisterForm) {
     try {
@@ -38,7 +39,7 @@ export async function NewCodeConfirmed(email: RequestConfirmationCodeForm) {
 
 export async function Login(formData: UserLoginForm) {
     try {
-        const {data} = await api.post<string>("/auth/login", formData);
+        const {data} = await api.post<string>("/auth/login", formData);        
         localStorage.setItem("AuthUser", data)
         return
     } catch (error) {
@@ -87,8 +88,8 @@ export async function NewPass({formData, token}: PropsNewPass) {
 
 export async function getUser() {    
     try {
-        const {data} = await api(`/auth/user`);
-        const result = userSchemma.safeParse(data)
+        const data = await api(`/auth/user`);
+        const result = userSchemma.safeParse(data.data)
         if (result.success) {
             return result.data;
         }        

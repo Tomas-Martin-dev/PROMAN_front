@@ -50,3 +50,5 @@ export type ForgotPasswordForm = Pick<Auth, "email">
 export type NewPasswordForm = Pick<Auth, "password" | "password_confirmation">
 
 export type user = z.infer<typeof userSchemma>
+export type TeamMemberForm = Pick<user, "email">
+
