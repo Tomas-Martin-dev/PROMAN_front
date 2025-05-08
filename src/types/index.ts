@@ -1,6 +1,6 @@
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 import z from "zod"
-import { authSchemma, initialProject, projectFullSchemma, taskSchemma, userSchemma } from "./schemmas";
+import { authSchemma, initialProject, noteSchemma, projectFullSchemma, taskSchemma, userSchemma } from "./schemmas";
 
 export type InitialType = z.infer<typeof initialProject> 
 export type InitialProjectFormType = Pick<InitialType, "projectName" | "clientName" | "descrption">
@@ -52,3 +52,8 @@ export type NewPasswordForm = Pick<Auth, "password" | "password_confirmation">
 export type user = z.infer<typeof userSchemma>
 export type TeamMemberForm = Pick<user, "email">
 
+
+// NOTES
+
+export type Note = z.infer<typeof noteSchemma>
+export type NoteFormData = Pick<Note, "content">

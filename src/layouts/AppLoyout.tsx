@@ -16,12 +16,14 @@ export default function AppLoyout() {
     }
     
     if (data) return (
-        <>
+        <div className='flex flex-col min-h-screen'>
             <Header data={data}/>
 
-            <section className='max-w-11/12  mx-auto mt-10 p-5'>
-                <Outlet />
-            </section>
+            <main className='flex-grow'>
+                <section className='max-w-11/12 mx-auto mt-10 p-5'>
+                    <Outlet />
+                </section>
+            </main>
 
             <footer className='p-5 bg-gray-200'>
                 <p className='text-center flex flex-col'>
@@ -38,6 +40,6 @@ export default function AppLoyout() {
                 theme="light"
                 transition={Slide}
             />
-        </>
+        </div>
     )
 }

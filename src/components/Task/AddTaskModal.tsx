@@ -35,7 +35,7 @@ export default function AddTaskModal() {
   const mutation = useMutation({
     mutationFn: createTaks,
     onError: (error) => {
-      toast.error(formatErrorMessages(error));
+      toast.error(error.message);
     },
     onSuccess: (result) => {
       queryClient.invalidateQueries({queryKey: ["editProject", projectID]})
@@ -107,7 +107,7 @@ export default function AddTaskModal() {
                     <input
                       type="submit"
                       value="Crear Tarea"
-                      className="bg-fuchsia-600 hover:bg-fuchsia-700 w-full p-3 text-white uppercase font-bold cursor-pointer transition-colors rounded-sm"
+                      className="rounded-md px-10 py-3 bg-purple-600 hover:bg-purple-700 text-white text-xl font-semibold transition-colors cursor-pointer w-full"
                     />
                   </form>
                 </Dialog.Panel>

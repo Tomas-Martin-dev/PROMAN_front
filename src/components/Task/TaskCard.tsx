@@ -10,9 +10,10 @@ import { toast } from "react-toastify";
 type PropType = {
   key: Task["_id"];
   task: Task;
+  canEdit: boolean
 };
 
-export default function TaskCard({ task }: PropType) {
+export default function TaskCard({ task, canEdit }: PropType) {
   const navigate = useNavigate();
   const params = useParams();
   const projectId = params.projectID!;
@@ -20,28 +21,28 @@ export default function TaskCard({ task }: PropType) {
   const QueryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: deleteTask,
-    onError: (error)=>{
+    onError: (error) => {
       toast.error(error.message)
     },
-    onSuccess: (result)=>{
+    onSuccess: (result) => {
       QueryClient.invalidateQueries({});
       toast.success(result)
     }
   })
 
-  const handleClick = ()=>{
+  const handleClick = () => {
     const okDelete = window.confirm("¿Seguro que deseas eliminar esta tarea? - No podras recuperarla");
-    okDelete ? mutation.mutate({projectId, taskID: task._id}) : toast.warning("Accion Cancelada");
+    okDelete ? mutation.mutate({ projectId, taskID: task._id }) : toast.warning("Accion Cancelada");
   }
 
-  return (  
+  return (
     <li className="p-5 bg-white border border-slate-300 flex justify-between gap-3">
       <div className="min-w-0 flex flex-col gap-y-4">
         <button
           type="button"
-          className="text-lg font-bold text-slate-700 text-left"
-        >
-          {task.name}
+          className="text-lg font-bold text-slate-700 text-left cursor-pointer"
+          onClick={() => navigate(`?viewTask=${task._id}`)}
+        >{task.name}
         </button>
         <p className="text-slate-500">{task.description}</p>
       </div>
@@ -66,30 +67,31 @@ export default function TaskCard({ task }: PropType) {
                 <button
                   type="button"
                   className="block px-3 py-1 text-sm leading-6 text-gray-900 cursor-pointer w-full text-left rounded-sm hover:bg-gray-50 transition-colors"
-                  onClick={()=> navigate(`?viewTask=${task._id}`)}
-                >
-                  Ver Tarea
+                  onClick={() => navigate(`?viewTask=${task._id}`)}
+                >Ver Tarea
                 </button>
               </Menu.Item>
-              <Menu.Item>
-                <button
-                  type="button"
-                  className="block px-3 py-1 text-sm leading-6 text-gray-900 cursor-pointer w-full text-left rounded-sm hover:bg-gray-50 transition-colors"
-                  onClick={()=> navigate(`?editTask=${task._id}`)}
-                >
-                  Editar Tarea
-                </button>
-              </Menu.Item>
+              {canEdit ? (
+                <>
+                  <Menu.Item>
+                    <button
+                      type="button"
+                      className="block px-3 py-1 text-sm leading-6 text-gray-900 cursor-pointer w-full text-left rounded-sm hover:bg-gray-50 transition-colors"
+                      onClick={() => navigate(`?editTask=${task._id}`)}
+                    >Editar Tarea
+                    </button>
+                  </Menu.Item>
 
-              <Menu.Item>
-                <button
-                  type="button"
-                  className="block px-3 py-1 text-sm leading-6 text-red-500 cursor-pointer w-full text-left rounded-sm hover:bg-gray-50 transition-colors"
-                  onClick={handleClick}
-                >
-                  Eliminar Tarea
-                </button>
-              </Menu.Item>
+                  <Menu.Item>
+                    <button
+                      type="button"
+                      className="block px-3 py-1 text-sm leading-6 text-red-500 cursor-pointer w-full text-left rounded-sm hover:bg-gray-50 transition-colors"
+                      onClick={handleClick}
+                    >Eliminar Tarea
+                    </button>
+                  </Menu.Item>
+                </>
+              ): ""}
             </Menu.Items>
           </Transition>
         </Menu>

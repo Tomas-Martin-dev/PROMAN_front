@@ -33,11 +33,11 @@ export default function LoginView() {
 
   // useEffect(()=>{
   //   localStorage.removeItem("AuthUser");
-  // },[])
+  // },[]) en caso de querer borrar el token de login cuando salga de la app
 
   return (
     <>
-      <h2 className="text-4xl font-bold text-white mt-2">Iniciar Sesión</h2>
+      <h2 className="text-4xl font-sans font-bold text-white mt-2">Iniciar Sesión</h2>
       <form
         onSubmit={handleSubmit(handleLogin)}
         className="space-y-8 p-10 bg-white rounded-md mt-4"
@@ -87,7 +87,7 @@ export default function LoginView() {
         <input
           type="submit"
           value='Iniciar Sesión'
-          className="bg-fuchsia-600 hover:bg-fuchsia-700 w-full p-3 rounded-sm text-white font-bold transition-colors text-xl cursor-pointer"
+          className="bg-fuchsia-600 hover:bg-fuchsia-700 w-full p-3 rounded-sm text-white font-semibold transition-colors text-xl cursor-pointer"
         />
       </form>
       <nav className="mt-10 flex flex-col space-y-4">

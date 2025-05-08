@@ -6,9 +6,14 @@ import { Menu, Transition } from '@headlessui/react'
 import { EllipsisVerticalIcon } from '@heroicons/react/20/solid'
 import { formatErrorMessages } from "../../utils/apiErrorFormat";
 import { toast } from "react-toastify";
+import { useAuth } from "../../hooks/useAuth";
+import { isManager } from "../../utils/policeies";
 
 
 export default function DashboardView() {
+
+  const { data: userLogin, isLoading: authLoading } = useAuth();
+
   const { data, isLoading } = useQuery({
     queryKey: ["projects"],
     queryFn: getProjects
@@ -17,42 +22,49 @@ export default function DashboardView() {
   const queryClient = useQueryClient()
   const mutation = useMutation({
     mutationFn: deleteProjectId,
-    onError: (error)=> {
-      toast.error( formatErrorMessages(error) );
+    onError: (error) => {
+      toast.error(formatErrorMessages(error));
     },
-    onSuccess: (result)=> {
-      queryClient.invalidateQueries({queryKey: ["projects"]})
+    onSuccess: (result) => {
+      queryClient.invalidateQueries({ queryKey: ["projects"] })
       toast.warn(result);
     }
   })
 
-  if (isLoading) return "Cargando...."
+  if (isLoading && authLoading) return "Cargando...."
   
-  return (
+  if (data && userLogin)return (
     <>
       <h1 className="text-5xl font-black">Mis Proyecto</h1>
 
-      <p className="text-2xl font-light text-gray-600 mt-5">Maneja y Administra tus proyectos</p>
+      <p className="text-2xl font-light text-gray-600 mt-3">Maneja y Administra tus proyectos</p>
 
-      <nav className="my-5">
+      <nav className="my-8">
         <Link
-          className="bg-blue-600 text-white px-10 py-3 rounded-md font-bold mt-5 cursor-pointer hover:bg-blue-700 transition-colors"
+          className="rounded-md px-10 py-3 bg-purple-600 hover:bg-purple-700 text-white text-lg font-semibold transition-colors cursor-pointer"
           to={"projects/create"}
         >Nuevo Proyecto
         </Link>
       </nav>
 
-      <div className="mt-6">
-        {data?.length ? (
+      <div>
+        {data.length ? (
           <>
-            <ul role="list" className="divide-y divide-gray-100 border border-gray-100 mt-10 bg-white shadow-lg">
+            <ul role="list" className="divide-y divide-gray-100 border border-gray-100 bg-white shadow-lg">
               {data.map((project) => (
                 <li key={project._id} className="flex justify-between gap-x-6 px-5 py-10">
                   <div className="flex min-w-0 gap-x-4">
                     <div className="min-w-0 flex-auto space-y-2">
+                      <div>
+                        { isManager(project.manager, userLogin._id) ? 
+                          <p className="font-medium text-sm uppercase bg-indigo-50 text-indigo-500 border-2 border-indigo-500 rounded-lg inline-block py-1 px-5">Manager</p> : 
+                          <p className="font-medium text-sm uppercase bg-emerald-50 text-emerald-500 border-2 border-emerald-500 rounded-lg inline-block py-1 px-5">Colaborador</p>
+                        }
+                      </div>
                       <Link to={`/projects/${project._id}`}
                         className="text-gray-600 cursor-pointer hover:underline text-3xl font-bold"
-                      >{project.projectName}</Link>
+                      >{project.projectName}
+                      </Link>
                       <p className="text-sm text-gray-400">
                         Cliente: {project.clientName}
                       </p>
@@ -80,21 +92,25 @@ export default function DashboardView() {
                               Ver Proyecto
                             </Link>
                           </Menu.Item>
-                          <Menu.Item>
-                            <Link to={`/projects/${project._id}/edit`}
-                              className='block px-3 py-1 text-sm leading-6 text-gray-900 rounded-sm hover:bg-gray-50 transition-colors'>
-                              Editar Proyecto
-                            </Link>
-                          </Menu.Item>
-                          <Menu.Item>
-                            <button
-                              type='button'
-                              className='block px-3 py-1 text-sm leading-6 text-red-500 cursor-pointer rounded-sm hover:bg-gray-50 transition-colors w-full text-left'
-                              onClick={() => { mutation.mutate(project._id)}}
-                            >
-                              Eliminar Proyecto
-                            </button>
-                          </Menu.Item>
+                          {isManager(project.manager, userLogin._id) && (
+                            <>
+                              <Menu.Item>
+                                <Link to={`/projects/${project._id}/edit`}
+                                  className='block px-3 py-1 text-sm leading-6 text-gray-900 rounded-sm hover:bg-gray-50 transition-colors'>
+                                  Editar Proyecto
+                                </Link>
+                              </Menu.Item>
+                              <Menu.Item>
+                                <button
+                                  type='button'
+                                  className='block px-3 py-1 text-sm leading-6 text-red-500 cursor-pointer rounded-sm hover:bg-gray-50 transition-colors w-full text-left'
+                                  onClick={() => { mutation.mutate(project._id) }}
+                                >
+                                  Eliminar Proyecto
+                                </button>
+                              </Menu.Item>
+                            </>
+                          )}
                         </Menu.Items>
                       </Transition>
                     </Menu>

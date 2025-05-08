@@ -53,7 +53,7 @@ export default function EditProjectForm({data, id} : EditFormProps) {
                 <p className="text-2xl font-light text-gray-600 mt-5">Completa el siguiente Formulario con los nuevos datos</p>
                 <nav className="my-5">
                     <Link
-                        className="bg-blue-600 text-white px-10 py-3 rounded-md font-bold mt-5 cursor-pointer hover:bg-blue-700 transition-colors"
+                        className="rounded-md px-10 py-3 bg-purple-600 hover:bg-purple-700 text-white text-lg font-semibold transition-colors cursor-pointer"
                         to={"/"}
                     >Mis Proyectos
                     </Link>
@@ -73,7 +73,7 @@ export default function EditProjectForm({data, id} : EditFormProps) {
                         type="submit"
                         value={"Guardar Cambios"}
                         disabled={disabled}
-                        className={`bg-fuchsia-600 hover:bg-fuchsia-700 w-full p-3 text-white uppercase font-bold cursor-pointer transition-colors rounded-sm ${disabled && "disabled:bg-gray-500 disabled:cursor-default disabled:shadow-inner"}`}
+                        className={`rounded-md px-10 py-3 bg-purple-600 hover:bg-purple-700 text-white text-xl font-semibold transition-colors cursor-pointer w-full ${disabled && "disabled:bg-gray-500 disabled:cursor-default disabled:shadow-inner"}`}
                     />
                 </form>
             </div>

@@ -14,7 +14,7 @@ export async function createTaks(info: PrompsCreateTaks) {
         return data
     } catch (error) {
         if (isAxiosError(error) && error.response) {
-            throw new Error(error.response.data.erros)
+            throw new Error(error.response.data.errors)
         } 
     }
 }
@@ -44,7 +44,7 @@ export const getTaskId = async (idProject: InitialType["_id"], idTask:Task["_id"
         }
     } catch (error) {
         if (isAxiosError(error) && error.response) {
-            throw new Error(error.response.data.erros)
+            throw new Error(error.response.data.errors)
         } 
     }
 }
@@ -60,7 +60,7 @@ export async function putTask({formData, taskID, projectId}: propsPutTask) {
         return data
     } catch (error) {
         if (isAxiosError(error) && error.response) {
-            throw new Error(error.response.data.erros)
+            throw new Error(error.response.data.errors)
         } 
     }
 }
@@ -75,7 +75,7 @@ export async function deleteTask({taskID, projectId}: deleteProps) {
         return data
     } catch (error) {
         if (isAxiosError(error) && error.response) {
-            throw new Error(error.response.data.erros)
+            throw new Error(error.response.data.errors)
         } 
     }
 }

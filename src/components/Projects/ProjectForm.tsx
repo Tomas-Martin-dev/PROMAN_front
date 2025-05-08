@@ -10,7 +10,7 @@ export default function ProjectForm({register, errors} : ProjectsTypes) {
                 </label>
                 <input
                     id="projectName"
-                    className="w-full p-3  border border-gray-200"
+                    className="w-full p-3 border border-gray-200"
                     type="text"
                     placeholder="Nombre del Proyecto"
                     {...register("initialValues.projectName", {

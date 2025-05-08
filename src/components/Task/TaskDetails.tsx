@@ -3,6 +3,7 @@ import TaskCard from "./TaskCard";
 
 type PropType = {
   data: ProjectFullType["tasks"];
+  canEdit: boolean
 };
 
 type GroupedTask = {
@@ -25,13 +26,13 @@ const statusStyles: {[key: string] : string} = {
   completed: "border-t-emerald-500",
 };
 
-export default function TaskDetails({ data }: PropType) {
+export default function TaskDetails({ data, canEdit }: PropType) {
   const groupedTasks = data.reduce((acc, task) => {
     let currentGroup = acc[task.status] ? [...acc[task.status]] : [];
     currentGroup = [...currentGroup, task];
     return { ...acc, [task.status]: currentGroup };
   }, initialValuesGroup);
-
+  
   return (
     <>
       <h2 className="text-5xl font-black my-10">Tareas</h2>
@@ -50,7 +51,7 @@ export default function TaskDetails({ data }: PropType) {
                   No Hay tareas
                 </li>
               ) : (
-                tasks.map((task) => <TaskCard key={task._id} task={task} />)
+                tasks.map((task) => <TaskCard key={task._id} task={task} canEdit={canEdit}/>)
               )}
             </ul>
           </div>
