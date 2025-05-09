@@ -31,8 +31,8 @@ export default function Router() {
                         <Route path="/profile" element={<ProfileView/>}  />
                         <Route path="/profile/password" element={<ChangePasswordView/>}  />
                     </Route>
-                    <Route path="/404" element={<Error404View/>}  />
                 </Route>
+
                 <Route element={<AuthLayout/>}>
                     <Route path="/auth/login" element={<LoginView/>} />
                     <Route path="/auth/register" element={<RegisterView/>} />
@@ -40,6 +40,10 @@ export default function Router() {
                     <Route path="/auth/request-code" element={<RequestNewCode/>} />
                     <Route path="/auth/forgot-password" element={<ForgotPasswordView/>} />
                     <Route path="/auth/new-password" element={<NewPassword/>} />
+                </Route>
+
+                <Route element={<AuthLayout/>}>
+                    <Route path="/404" element={<Error404View/>}  />
                 </Route>
             </Routes>
         </BrowserRouter>

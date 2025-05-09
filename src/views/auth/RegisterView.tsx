@@ -138,7 +138,7 @@ export default function RegisterView() {
                     type="submit"
                     value='Registrarme'
                     disabled={disabled}
-                    className={`bg-fuchsia-600 hover:bg-fuchsia-700 w-full p-3 transition-colors text-white font-bold rounded-sm text-xl cursor-pointer disabled:bg-gray-500 disabled:cursor-default`}
+                    className={`bg-fuchsia-600 hover:bg-fuchsia-700 w-full p-3 transition-colors text-white font-semibold rounded-sm text-xl cursor-pointer disabled:bg-gray-500 disabled:cursor-default`}
                 />
             </form>
             <nav className="mt-10 flex flex-col space-y-4">

@@ -71,7 +71,7 @@ export default function ForgotPasswordView() {
                     type="submit"
                     value='Enviar Instrucciones'
                     disabled={disabled}
-                    className="bg-fuchsia-600 hover:bg-fuchsia-700 w-full p-3 rounded-lg text-white font-black text-xl cursor-pointer disabled:bg-gray-500 disabled:cursor-default"
+                    className="bg-fuchsia-600 hover:bg-fuchsia-700 w-full p-3 transition-colors text-white font-semibold rounded-sm text-xl cursor-pointer disabled:bg-gray-500 disabled:cursor-default"
                 />
             </form>
 

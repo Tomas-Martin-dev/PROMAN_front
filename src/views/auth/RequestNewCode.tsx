@@ -65,7 +65,7 @@ export default function RequestNewCode() {
                 <input
                     type="submit"
                     value='Enviar Código'
-                    className="bg-fuchsia-600 hover:bg-fuchsia-700 w-full p-3 rounded-lg text-white font-black  text-xl cursor-pointer"
+                    className="bg-fuchsia-600 hover:bg-fuchsia-700 w-full p-3 rounded-lg text-white font-semibold  text-xl cursor-pointer"
                 />
             </form>
 
@@ -74,7 +74,7 @@ export default function RequestNewCode() {
                     to='/auth/login'
                     className="text-center text-gray-300 font-normal flex flex-col hover:text-gray-200"
                 >
-                    ¿Ya tienes cuenta o esta comfirmada?<span>Iniciar Sesión</span>
+                    ¿Ya tienes cuenta o esta confirmada?<span>Iniciar Sesión</span>
                 </Link>
                 <Link
                     to='/auth/forgot-password'
