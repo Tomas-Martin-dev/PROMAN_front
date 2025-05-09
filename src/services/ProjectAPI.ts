@@ -9,8 +9,6 @@ export const createProject = async (formData: { initialValues: InitialProjectFor
        
     try {
         const data = await api.post("/projects", formData.initialValues)
-        console.log(data);
-        
         return data;
     } catch (error) {
         if (isAxiosError(error) && error.response) {
@@ -62,7 +60,6 @@ export const putProjectId = async ({formData, id} : putProjectType) => {
 }
 
 export const deleteProjectId = async (id : InitialType["_id"]) => {
-     
     try {
         const {data} = await api.delete<string>(`/projects/${id}`)
         return data

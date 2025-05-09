@@ -1,8 +1,7 @@
 import { isAxiosError } from "axios";
 import api from "../lib/axios";
-import { ConfirmToken, ForgotPasswordForm, NewPasswordForm, RequestConfirmationCodeForm, UserLoginForm, UserRegisterForm } from "../types";
+import { CheckPasswordForm, ConfirmToken, ForgotPasswordForm, NewPasswordForm, RequestConfirmationCodeForm, UpdatePasswordForm, UserLoginForm, UserProfileForm, UserRegisterForm } from "../types";
 import { userSchemma } from "../types/schemmas";
-import { data } from "react-router-dom";
 
 export async function createAccount(formData: UserRegisterForm) {
     try {
@@ -96,6 +95,39 @@ export async function getUser() {
     } catch (error) {
         if (isAxiosError(error) && error.response) {
             throw new Error(error.response.data.error)
+        } 
+    }
+}
+
+export async function updateProfile(formData: UserProfileForm) {    
+    try {
+        const {data} = await api.put<string>(`/auth/profile`, formData);
+        return data
+    } catch (error) {
+        if (isAxiosError(error) && error.response) {
+            throw new Error(error.response.data.errors)
+        } 
+    }
+}
+
+export async function updatePassword(FormData: UpdatePasswordForm) {    
+    try {
+        const {data} = await api.post<string>(`/auth/profile/changePass`, FormData);
+        return data
+    } catch (error) {
+        if (isAxiosError(error) && error.response) {
+            throw new Error(error.response.data.errors)
+        } 
+    }
+}
+
+export async function checkPassword(FormData: CheckPasswordForm) {    
+    try {
+        const {data} = await api.post<string>(`/auth/check-password`, FormData);
+        return data
+    } catch (error) {
+        if (isAxiosError(error) && error.response) {
+            throw new Error(error.response.data.errors)
         } 
     }
 }

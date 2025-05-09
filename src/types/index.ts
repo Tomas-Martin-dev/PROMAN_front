@@ -48,9 +48,15 @@ export type ConfirmToken = Pick<Auth, "token">
 export type RequestConfirmationCodeForm = Pick<Auth, "email">
 export type ForgotPasswordForm = Pick<Auth, "email">
 export type NewPasswordForm = Pick<Auth, "password" | "password_confirmation">
+export type CheckPasswordForm = Pick<Auth, "password">
 
 export type user = z.infer<typeof userSchemma>
 export type TeamMemberForm = Pick<user, "email">
+export type UserProfileForm = Pick<user, "email" | "name">
+
+export type UpdatePasswordForm = Pick<Auth, "password" | "password_confirmation"> & {
+    current_password: string;
+};
 
 
 // NOTES
