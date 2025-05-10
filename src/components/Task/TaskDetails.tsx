@@ -62,7 +62,7 @@ export default function TaskDetails({ data, canEdit }: PropType) {
       mutacion.mutate({ projectId, taskID, status });
 
       queryClient.setQueryData(["editProject", projectId], (prevData: ProjectFullType) => {
-        const updatedTask = prevData.tasks.map( task => {
+        const updatedTasks = prevData.tasks.map( task => {
           if (task._id === taskID) {
             return {
               ...task,
@@ -73,7 +73,7 @@ export default function TaskDetails({ data, canEdit }: PropType) {
         })
         return {
           ...prevData,
-          task: updatedTask
+          tasks: updatedTasks
         }
       })
     }
