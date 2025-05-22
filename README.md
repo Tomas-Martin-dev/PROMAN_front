@@ -1,54 +1,28 @@
-# React + TypeScript + Vite
+# ProMan - APP FRONT
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+ProMan es una app pensada para la gestión de proyectos y tareas colaborativas, construido con una arquitectura modular, rutas protegidas, y manejo eficiente del estado y la obtención de datos
 
-Currently, two official plugins are available:
+## 🎓 Tecnologías y Librerías Principales
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+* [React](https://reactjs.org/) - Biblioteca para construir interfaces de usuario
+* [TypeScript](https://www.typescriptlang.org/) - Superset de JavaScript tipado
+* [Vite](https://vitejs.dev/) - Empaquetador rápido para desarrollo
+* [Tailwind CSS](https://tailwindcss.com/) - Framework de CSS utilitario
+* [React Router DOM](https://reactrouter.com/) - Navegación entre vistas
+* [TanStack React Query](https://tanstack.com/query) - Manejo de datos asíncronos y caché
+* [React Query Devtools](https://tanstack.com/query/latest/docs/react/devtools) - Herramientas de depuración
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🧱 Arquitectura y Buenas Prácticas
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+* **🔹 Modularización por Dominios**: Vistas organizadas por contexto funcional (`auth`, `projects`, `profile`), siguiendo principios inspirados en Domain-Driven Design.
+* **🔹 Layouts Reutilizables**: Composición de páginas con `AppLayout`, `AuthLayout`, etc., para estructurar y reutilizar interfaces comunes como barras de navegación.
+* **🔹 Rutas Anidadas con React Router**: Navegación declarativa con soporte para rutas protegidas y `Outlet` para render dinámico de contenidos.
+* **🔹 React Query para Gestión de Datos**: Caché automática, sincronización del estado del servidor, revalidación en segundo plano y manejo de errores desacoplado de los componentes.
+* **🔹 Robustez con TypeScript y Strict Mode**: Tipado estático y detección de patrones problemáticos de renderizado para una base de código más segura.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+## URL BACK
+https://github.com/Tomas-Martin-dev/PROMAN_back
